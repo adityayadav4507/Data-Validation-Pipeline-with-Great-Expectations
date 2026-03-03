@@ -123,18 +123,3 @@ python main.py --input data/your_file.csv
 
 ## Evaluator Guide
 See `EVALUATION_GUIDE.md`.
-
-## Upload To GitHub
-```bash
-git add .
-git commit -m "Data Validation Pipeline with Great Expectations"
-git push
-```
-
-If this is a new repository:
-```bash
-git init
-git branch -M main
-git remote add origin https://github.com/<your-username>/<repo-name>.git
-git push -u origin main
-```
