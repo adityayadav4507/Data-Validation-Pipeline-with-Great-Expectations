@@ -1,0 +1,655 @@
+{
+  "run_id": {
+    "run_name": null,
+    "run_time": "2026-03-03T14:19:06.446768+05:30"
+  },
+  "run_results": {
+    "ValidationResultIdentifier::sales_data_suite/__none__/20260303T084906.446768Z/7ee21842fe220eb523abf1fe91ab1d76": {
+      "validation_result": {
+        "success": false,
+        "results": [
+          {
+            "success": true,
+            "expectation_config": {
+              "expectation_type": "expect_table_row_count_to_be_between",
+              "kwargs": {
+                "max_value": 100000,
+                "min_value": 1,
+                "batch_id": "7ee21842fe220eb523abf1fe91ab1d76"
+              },
+              "meta": {}
+            },
+            "result": {
+              "observed_value": 15
+            },
+            "meta": {},
+            "exception_info": {
+              "raised_exception": false,
+              "exception_traceback": null,
+              "exception_message": null
+            }
+          },
+          {
+            "success": true,
+            "expectation_config": {
+              "expectation_type": "expect_column_values_to_not_be_null",
+              "kwargs": {
+                "column": "order_id",
+                "batch_id": "7ee21842fe220eb523abf1fe91ab1d76"
+              },
+              "meta": {}
+            },
+            "result": {
+              "element_count": 15,
+              "unexpected_count": 0,
+              "unexpected_percent": 0.0,
+              "partial_unexpected_list": [],
+              "partial_unexpected_counts": [],
+              "partial_unexpected_index_list": []
+            },
+            "meta": {},
+            "exception_info": {
+              "raised_exception": false,
+              "exception_traceback": null,
+              "exception_message": null
+            }
+          },
+          {
+            "success": false,
+            "expectation_config": {
+              "expectation_type": "expect_column_values_to_be_unique",
+              "kwargs": {
+                "column": "order_id",
+                "batch_id": "7ee21842fe220eb523abf1fe91ab1d76"
+              },
+              "meta": {}
+            },
+            "result": {
+              "element_count": 15,
+              "unexpected_count": 2,
+              "unexpected_percent": 13.333333333333334,
+              "partial_unexpected_list": [
+                1007,
+                1007
+              ],
+              "missing_count": 0,
+              "missing_percent": 0.0,
+              "unexpected_percent_total": 13.333333333333334,
+              "unexpected_percent_nonmissing": 13.333333333333334,
+              "partial_unexpected_counts": [
+                {
+                  "value": 1007,
+                  "count": 2
+                }
+              ],
+              "partial_unexpected_index_list": [
+                6,
+                7
+              ]
+            },
+            "meta": {},
+            "exception_info": {
+              "raised_exception": false,
+              "exception_traceback": null,
+              "exception_message": null
+            }
+          },
+          {
+            "success": true,
+            "expectation_config": {
+              "expectation_type": "expect_column_values_to_be_in_type_list",
+              "kwargs": {
+                "column": "order_id",
+                "type_list": [
+                  "int64",
+                  "int32",
+                  "float64"
+                ],
+                "batch_id": "7ee21842fe220eb523abf1fe91ab1d76"
+              },
+              "meta": {}
+            },
+            "result": {
+              "observed_value": "int64"
+            },
+            "meta": {},
+            "exception_info": {
+              "raised_exception": false,
+              "exception_traceback": null,
+              "exception_message": null
+            }
+          },
+          {
+            "success": false,
+            "expectation_config": {
+              "expectation_type": "expect_column_values_to_not_be_null",
+              "kwargs": {
+                "column": "customer_id",
+                "batch_id": "7ee21842fe220eb523abf1fe91ab1d76"
+              },
+              "meta": {}
+            },
+            "result": {
+              "element_count": 15,
+              "unexpected_count": 1,
+              "unexpected_percent": 6.666666666666667,
+              "partial_unexpected_list": [
+                null
+              ],
+              "partial_unexpected_counts": [
+                {
+                  "value": null,
+                  "count": 1
+                }
+              ],
+              "partial_unexpected_index_list": [
+                5
+              ]
+            },
+            "meta": {},
+            "exception_info": {
+              "raised_exception": false,
+              "exception_traceback": null,
+              "exception_message": null
+            }
+          },
+          {
+            "success": true,
+            "expectation_config": {
+              "expectation_type": "expect_column_values_to_be_in_type_list",
+              "kwargs": {
+                "column": "customer_id",
+                "type_list": [
+                  "int64",
+                  "int32",
+                  "float64"
+                ],
+                "batch_id": "7ee21842fe220eb523abf1fe91ab1d76"
+              },
+              "meta": {}
+            },
+            "result": {
+              "observed_value": "float64"
+            },
+            "meta": {},
+            "exception_info": {
+              "raised_exception": false,
+              "exception_traceback": null,
+              "exception_message": null
+            }
+          },
+          {
+            "success": false,
+            "expectation_config": {
+              "expectation_type": "expect_column_values_to_not_be_null",
+              "kwargs": {
+                "column": "product_id",
+                "batch_id": "7ee21842fe220eb523abf1fe91ab1d76"
+              },
+              "meta": {}
+            },
+            "result": {
+              "element_count": 15,
+              "unexpected_count": 1,
+              "unexpected_percent": 6.666666666666667,
+              "partial_unexpected_list": [
+                null
+              ],
+              "partial_unexpected_counts": [
+                {
+                  "value": null,
+                  "count": 1
+                }
+              ],
+              "partial_unexpected_index_list": [
+                11
+              ]
+            },
+            "meta": {},
+            "exception_info": {
+              "raised_exception": false,
+              "exception_traceback": null,
+              "exception_message": null
+            }
+          },
+          {
+            "success": true,
+            "expectation_config": {
+              "expectation_type": "expect_column_values_to_be_in_type_list",
+              "kwargs": {
+                "column": "product_id",
+                "type_list": [
+                  "int64",
+                  "int32",
+                  "float64"
+                ],
+                "batch_id": "7ee21842fe220eb523abf1fe91ab1d76"
+              },
+              "meta": {}
+            },
+            "result": {
+              "observed_value": "float64"
+            },
+            "meta": {},
+            "exception_info": {
+              "raised_exception": false,
+              "exception_traceback": null,
+              "exception_message": null
+            }
+          },
+          {
+            "success": false,
+            "expectation_config": {
+              "expectation_type": "expect_column_values_to_not_be_null",
+              "kwargs": {
+                "column": "order_date",
+                "batch_id": "7ee21842fe220eb523abf1fe91ab1d76"
+              },
+              "meta": {}
+            },
+            "result": {
+              "element_count": 15,
+              "unexpected_count": 1,
+              "unexpected_percent": 6.666666666666667,
+              "partial_unexpected_list": [
+                null
+              ],
+              "partial_unexpected_counts": [
+                {
+                  "value": null,
+                  "count": 1
+                }
+              ],
+              "partial_unexpected_index_list": [
+                10
+              ]
+            },
+            "meta": {},
+            "exception_info": {
+              "raised_exception": false,
+              "exception_traceback": null,
+              "exception_message": null
+            }
+          },
+          {
+            "success": true,
+            "expectation_config": {
+              "expectation_type": "expect_column_values_to_not_be_null",
+              "kwargs": {
+                "column": "quantity",
+                "batch_id": "7ee21842fe220eb523abf1fe91ab1d76"
+              },
+              "meta": {}
+            },
+            "result": {
+              "element_count": 15,
+              "unexpected_count": 0,
+              "unexpected_percent": 0.0,
+              "partial_unexpected_list": [],
+              "partial_unexpected_counts": [],
+              "partial_unexpected_index_list": []
+            },
+            "meta": {},
+            "exception_info": {
+              "raised_exception": false,
+              "exception_traceback": null,
+              "exception_message": null
+            }
+          },
+          {
+            "success": false,
+            "expectation_config": {
+              "expectation_type": "expect_column_values_to_be_between",
+              "kwargs": {
+                "column": "quantity",
+                "max_value": 20,
+                "min_value": 1,
+                "batch_id": "7ee21842fe220eb523abf1fe91ab1d76"
+              },
+              "meta": {}
+            },
+            "result": {
+              "element_count": 15,
+              "unexpected_count": 2,
+              "unexpected_percent": 13.333333333333334,
+              "partial_unexpected_list": [
+                0,
+                25
+              ],
+              "missing_count": 0,
+              "missing_percent": 0.0,
+              "unexpected_percent_total": 13.333333333333334,
+              "unexpected_percent_nonmissing": 13.333333333333334,
+              "partial_unexpected_counts": [
+                {
+                  "value": 0,
+                  "count": 1
+                },
+                {
+                  "value": 25,
+                  "count": 1
+                }
+              ],
+              "partial_unexpected_index_list": [
+                3,
+                12
+              ]
+            },
+            "meta": {},
+            "exception_info": {
+              "raised_exception": false,
+              "exception_traceback": null,
+              "exception_message": null
+            }
+          },
+          {
+            "success": true,
+            "expectation_config": {
+              "expectation_type": "expect_column_values_to_be_in_type_list",
+              "kwargs": {
+                "column": "quantity",
+                "type_list": [
+                  "int64",
+                  "int32",
+                  "float64"
+                ],
+                "batch_id": "7ee21842fe220eb523abf1fe91ab1d76"
+              },
+              "meta": {}
+            },
+            "result": {
+              "observed_value": "int64"
+            },
+            "meta": {},
+            "exception_info": {
+              "raised_exception": false,
+              "exception_traceback": null,
+              "exception_message": null
+            }
+          },
+          {
+            "success": true,
+            "expectation_config": {
+              "expectation_type": "expect_column_values_to_not_be_null",
+              "kwargs": {
+                "column": "unit_price",
+                "batch_id": "7ee21842fe220eb523abf1fe91ab1d76"
+              },
+              "meta": {}
+            },
+            "result": {
+              "element_count": 15,
+              "unexpected_count": 0,
+              "unexpected_percent": 0.0,
+              "partial_unexpected_list": [],
+              "partial_unexpected_counts": [],
+              "partial_unexpected_index_list": []
+            },
+            "meta": {},
+            "exception_info": {
+              "raised_exception": false,
+              "exception_traceback": null,
+              "exception_message": null
+            }
+          },
+          {
+            "success": false,
+            "expectation_config": {
+              "expectation_type": "expect_column_values_to_be_between",
+              "kwargs": {
+                "column": "unit_price",
+                "max_value": 5000,
+                "min_value": 1,
+                "batch_id": "7ee21842fe220eb523abf1fe91ab1d76"
+              },
+              "meta": {}
+            },
+            "result": {
+              "element_count": 15,
+              "unexpected_count": 1,
+              "unexpected_percent": 6.666666666666667,
+              "partial_unexpected_list": [
+                -40.0
+              ],
+              "missing_count": 0,
+              "missing_percent": 0.0,
+              "unexpected_percent_total": 6.666666666666667,
+              "unexpected_percent_nonmissing": 6.666666666666667,
+              "partial_unexpected_counts": [
+                {
+                  "value": -40.0,
+                  "count": 1
+                }
+              ],
+              "partial_unexpected_index_list": [
+                4
+              ]
+            },
+            "meta": {},
+            "exception_info": {
+              "raised_exception": false,
+              "exception_traceback": null,
+              "exception_message": null
+            }
+          },
+          {
+            "success": true,
+            "expectation_config": {
+              "expectation_type": "expect_column_values_to_be_in_type_list",
+              "kwargs": {
+                "column": "unit_price",
+                "type_list": [
+                  "float64",
+                  "int64",
+                  "int32"
+                ],
+                "batch_id": "7ee21842fe220eb523abf1fe91ab1d76"
+              },
+              "meta": {}
+            },
+            "result": {
+              "observed_value": "float64"
+            },
+            "meta": {},
+            "exception_info": {
+              "raised_exception": false,
+              "exception_traceback": null,
+              "exception_message": null
+            }
+          },
+          {
+            "success": false,
+            "expectation_config": {
+              "expectation_type": "expect_column_values_to_be_between",
+              "kwargs": {
+                "column": "discount_pct",
+                "max_value": 60,
+                "min_value": 0,
+                "batch_id": "7ee21842fe220eb523abf1fe91ab1d76"
+              },
+              "meta": {}
+            },
+            "result": {
+              "element_count": 15,
+              "unexpected_count": 1,
+              "unexpected_percent": 6.666666666666667,
+              "partial_unexpected_list": [
+                75
+              ],
+              "missing_count": 0,
+              "missing_percent": 0.0,
+              "unexpected_percent_total": 6.666666666666667,
+              "unexpected_percent_nonmissing": 6.666666666666667,
+              "partial_unexpected_counts": [
+                {
+                  "value": 75,
+                  "count": 1
+                }
+              ],
+              "partial_unexpected_index_list": [
+                8
+              ]
+            },
+            "meta": {},
+            "exception_info": {
+              "raised_exception": false,
+              "exception_traceback": null,
+              "exception_message": null
+            }
+          },
+          {
+            "success": false,
+            "expectation_config": {
+              "expectation_type": "expect_column_values_to_be_in_set",
+              "kwargs": {
+                "column": "payment_method",
+                "value_set": [
+                  "card",
+                  "upi",
+                  "cash"
+                ],
+                "batch_id": "7ee21842fe220eb523abf1fe91ab1d76"
+              },
+              "meta": {}
+            },
+            "result": {
+              "element_count": 15,
+              "unexpected_count": 1,
+              "unexpected_percent": 6.666666666666667,
+              "partial_unexpected_list": [
+                "crypto"
+              ],
+              "missing_count": 0,
+              "missing_percent": 0.0,
+              "unexpected_percent_total": 6.666666666666667,
+              "unexpected_percent_nonmissing": 6.666666666666667,
+              "partial_unexpected_counts": [
+                {
+                  "value": "crypto",
+                  "count": 1
+                }
+              ],
+              "partial_unexpected_index_list": [
+                9
+              ]
+            },
+            "meta": {},
+            "exception_info": {
+              "raised_exception": false,
+              "exception_traceback": null,
+              "exception_message": null
+            }
+          }
+        ],
+        "evaluation_parameters": {},
+        "statistics": {
+          "evaluated_expectations": 17,
+          "successful_expectations": 9,
+          "unsuccessful_expectations": 8,
+          "success_percent": 52.94117647058824
+        },
+        "meta": {
+          "great_expectations_version": "0.18.21",
+          "expectation_suite_name": "sales_data_suite",
+          "run_id": {
+            "run_name": null,
+            "run_time": "2026-03-03T14:19:06.446768+05:30"
+          },
+          "batch_spec": {
+            "data_asset_name": "clean_sales_data",
+            "path": "output/clean_sales.csv"
+          },
+          "batch_markers": {
+            "ge_load_time": "20260303T084906.451774Z",
+            "pandas_data_fingerprint": "2d752b4c18c7708690bf6b28ce4c65ad"
+          },
+          "active_batch_definition": {
+            "datasource_name": "sales_pandas_datasource",
+            "data_connector_name": "default_runtime_data_connector_name",
+            "data_asset_name": "clean_sales_data",
+            "batch_identifiers": {
+              "default_identifier_name": "default_batch"
+            }
+          },
+          "validation_time": "20260303T084906.460716Z",
+          "checkpoint_name": "sales_data_checkpoint",
+          "validation_id": null,
+          "checkpoint_id": null
+        }
+      },
+      "actions_results": {
+        "store_validation_result": {
+          "class": "StoreValidationResultAction"
+        },
+        "store_evaluation_params": {
+          "class": "StoreEvaluationParametersAction"
+        },
+        "update_data_docs": {
+          "local_site": "great_expectations/uncommitted/data_docs/local_site/validations/sales_data_suite/__none__/20260303T084906.446768Z/7ee21842fe220eb523abf1fe91ab1d76.html",
+          "class": "UpdateDataDocsAction"
+        }
+      }
+    }
+  },
+  "checkpoint_config": {
+    "expectation_suite_ge_cloud_id": null,
+    "config_version": 1.0,
+    "class_name": "Checkpoint",
+    "default_validation_id": null,
+    "profilers": [],
+    "notify_with": null,
+    "module_name": "great_expectations.checkpoint",
+    "evaluation_parameters": {},
+    "notify_on": null,
+    "name": "sales_data_checkpoint",
+    "batch_request": {},
+    "template_name": null,
+    "action_list": [
+      {
+        "name": "store_validation_result",
+        "action": {
+          "class_name": "StoreValidationResultAction"
+        }
+      },
+      {
+        "name": "store_evaluation_params",
+        "action": {
+          "class_name": "StoreEvaluationParametersAction"
+        }
+      },
+      {
+        "name": "update_data_docs",
+        "action": {
+          "class_name": "UpdateDataDocsAction"
+        }
+      }
+    ],
+    "validations": [
+      {
+        "expectation_suite_ge_cloud_id": null,
+        "name": null,
+        "batch_request": {
+          "datasource_name": "sales_pandas_datasource",
+          "data_connector_name": "default_runtime_data_connector_name",
+          "data_asset_name": "clean_sales_data",
+          "runtime_parameters": {
+            "path": "output/clean_sales.csv"
+          },
+          "batch_identifiers": {
+            "default_identifier_name": "default_batch"
+          },
+          "batch_spec_passthrough": null
+        },
+        "id": null,
+        "expectation_suite_name": "sales_data_suite"
+      }
+    ],
+    "site_names": null,
+    "run_name_template": null,
+    "slack_webhook": null,
+    "ge_cloud_id": null,
+    "runtime_configuration": {},
+    "expectation_suite_name": null
+  },
+  "success": false
+}

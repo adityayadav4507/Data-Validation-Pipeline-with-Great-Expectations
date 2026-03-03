@@ -1,0 +1,696 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Data Quality Report</title>
+  <style>
+    :root {
+      --bg: #f4f6fb;
+      --surface: #ffffff;
+      --text: #1f2937;
+      --muted: #5b6475;
+      --border: #e3e8f0;
+      --primary: #1d4ed8;
+      --pass: #157347;
+      --pass-soft: #e9f8ee;
+      --fail: #b42318;
+      --fail-soft: #fff1f0;
+      --warn-soft: #fff8e8;
+      --shadow: 0 8px 24px rgba(12, 24, 43, 0.07);
+    }
+    * {
+      box-sizing: border-box;
+    }
+    body {
+      margin: 0;
+      font-family: "Segoe UI", Arial, sans-serif;
+      background: linear-gradient(180deg, #eef3ff 0, var(--bg) 220px);
+      color: var(--text);
+      line-height: 1.65;
+    }
+    .container {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 36px 22px 60px;
+    }
+    .hero {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      box-shadow: var(--shadow);
+      padding: 26px;
+      margin-bottom: 22px;
+    }
+    h1 {
+      margin: 0 0 8px 0;
+      font-size: 34px;
+      letter-spacing: 0.2px;
+    }
+    .subtitle {
+      color: var(--muted);
+      margin: 0 0 16px 0;
+      font-size: 17px;
+    }
+    .meta {
+      color: var(--muted);
+      font-size: 14px;
+    }
+    .decision {
+      margin-top: 16px;
+      padding: 14px 16px;
+      border-radius: 12px;
+      border: 1px solid #f7c8c3;
+      background: var(--fail-soft);
+      color: var(--fail);
+      font-weight: 700;
+    }
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 14px;
+      margin: 20px 0 24px;
+    }
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 16px;
+      box-shadow: var(--shadow);
+    }
+    .card .label {
+      color: var(--muted);
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.6px;
+      margin-bottom: 7px;
+    }
+    .card .value {
+      font-size: 26px;
+      line-height: 1;
+      font-weight: 700;
+    }
+    .btn {
+      display: inline-block;
+      border: none;
+      background: var(--primary);
+      color: white;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 15px;
+      border-radius: 8px;
+      padding: 10px 14px;
+      margin-top: 14px;
+    }
+    .btn.secondary {
+      background: #0f766e;
+    }
+    .section {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      box-shadow: var(--shadow);
+      padding: 22px;
+      margin-bottom: 20px;
+    }
+    .section h2 {
+      margin: 0 0 14px 0;
+      font-size: 20px;
+    }
+    .plain-list, .actions {
+      margin: 0;
+      padding-left: 22px;
+    }
+    .hint {
+      margin-top: 12px;
+      font-size: 14px;
+      color: var(--muted);
+    }
+    .legend {
+      background: var(--warn-soft);
+      border: 1px solid #f5ddb0;
+      border-radius: 8px;
+      padding: 10px 12px;
+      font-size: 14px;
+      margin-bottom: 14px;
+    }
+    table.clean-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 14px;
+      margin-top: 8px;
+    }
+    table.clean-table th, table.clean-table td {
+      border: 1px solid var(--border);
+      padding: 11px 12px;
+      vertical-align: top;
+      text-align: left;
+    }
+    table.clean-table th {
+      background: #f7faff;
+      font-weight: 700;
+    }
+    .subtle {
+      font-size: 12px;
+      color: var(--muted);
+      margin-top: 3px;
+    }
+    .pill {
+      display: inline-block;
+      min-width: 34px;
+      text-align: center;
+      font-weight: 700;
+      border-radius: 999px;
+      padding: 2px 8px;
+      font-size: 12px;
+    }
+    .pill.p1 {
+      background: #ffe7e5;
+      color: #b42318;
+      border: 1px solid #f6c7c3;
+    }
+    .pill.p2 {
+      background: #fff5de;
+      color: #9a6700;
+      border: 1px solid #f2e2b3;
+    }
+    .pill.p3, .pill.p0 {
+      background: #edf2ff;
+      color: #3656b5;
+      border: 1px solid #dbe4ff;
+    }
+    .issue-rows-table .cell-issue {
+      background: #fff1c2;
+      color: #7a4a00;
+      font-weight: 700;
+    }
+    .issue-row td:first-child,
+    .issue-row td:nth-child(2) {
+      font-weight: 600;
+    }
+    .issues-col {
+      min-width: 240px;
+    }
+    .issue-table tbody tr:nth-child(even),
+    .issue-rows-table tbody tr:nth-child(even) {
+      background: #fcfdff;
+    }
+    details {
+      margin-top: 14px;
+    }
+    summary {
+      cursor: pointer;
+      font-weight: 600;
+      color: #344054;
+    }
+    @media (max-width: 768px) {
+      h1 {
+        font-size: 28px;
+      }
+      .container {
+        padding: 18px 12px 28px;
+      }
+      table.clean-table {
+        font-size: 13px;
+      }
+      .section {
+        padding: 16px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="hero">
+      <h1>Data Quality Report</h1>
+      <p class="subtitle">Quick view. Clear action.</p>
+      <div class="meta">Generated (UTC): 2026-03-03T08:49:07.550434+00:00 | Engine: great_expectations</div>
+      <div class="decision">Decision: NOT READY | Not ready. Fix rows below. Run python main.py.</div>
+      <a class="btn secondary" href="local_site/index.html" target="_blank" rel="noopener">Open Full GX Report</a>
+    </div>
+
+    <div class="cards">
+      <div class="card">
+        <div class="label">Status</div>
+        <div class="value">NOT READY</div>
+      </div>
+      <div class="card">
+        <div class="label">Score</div>
+        <div class="value">52.9%</div>
+      </div>
+      <div class="card">
+        <div class="label">Checks</div>
+        <div class="value">9/17</div>
+      </div>
+      <div class="card">
+        <div class="label">Rows To Fix</div>
+        <div class="value">10/15</div>
+      </div>
+    </div>
+
+    <div class="section">
+      <h2>Quick Steps</h2>
+      <ol class="plain-list">
+        <li>See <strong>Status</strong> and <strong>Score</strong>.</li>
+        <li>Open <strong>Issues (Row + ID)</strong>.</li>
+        <li>Fix yellow cells in <strong>Fix Rows</strong>.</li>
+        <li>Run <code>python main.py</code>.</li>
+      </ol>
+    </div>
+
+    <div class="section">
+      <h2>Scope</h2>
+      <ol class="plain-list">
+        <li>ETL clean + transform CSV.</li>
+        <li>GX checks: null, range, unique, type, category.</li>
+        <li>Auto reports: JSON, Markdown, HTML.</li>
+      </ol>
+    </div>
+
+    <div class="section">
+      <h2>Top Issues</h2>
+      <ul class="plain-list">
+        <li><strong>Duplicate value found</strong> | Row 7, 8 | Keep one `order_id`; block duplicates.</li><li><strong>Missing required value</strong> | Row 6 | Fill or drop blank `customer_id`.</li><li><strong>Missing required value</strong> | Row 12 | Fill or drop blank `product_id`.</li>
+      </ul>
+    </div>
+
+    <div class="section">
+      <h2>Fix First</h2>
+      <ol class="actions">
+        <li>P1: Keep one `order_id`; block duplicates.</li><li>P1: Fill or drop blank `customer_id`.</li><li>P1: Fill or drop blank `product_id`.</li><li>P1: Fill or drop blank `order_date`.</li><li>P2: Fix `quantity` outside limits.</li><li>P2: Fix `unit_price` outside limits.</li>
+      </ol>
+      <div class="hint">Then run: <code>python main.py</code></div>
+    </div>
+
+    <div class="section">
+      <h2>Issues (Row + ID)</h2>
+      <div class="hint">CSV row numbers start from 1.</div>
+      <table class="clean-table issue-table"><thead><tr><th>Pri</th><th>Issue</th><th>Col</th><th>Rows</th><th>IDs</th><th>Impact</th><th>Fix</th></tr></thead><tbody><tr><td><span class="pill p1">P1</span></td><td>Duplicate value found</td><td>order_id</td><td>7, 8<div class='subtle'>2 row(s)</div></td><td>1007</td><td>Wrong totals.</td><td>Keep one `order_id`; block duplicates.</td></tr><tr><td><span class="pill p1">P1</span></td><td>Missing required value</td><td>customer_id</td><td>6<div class='subtle'>1 row(s)</div></td><td>1006</td><td>Incomplete records.</td><td>Fill or drop blank `customer_id`.</td></tr><tr><td><span class="pill p1">P1</span></td><td>Missing required value</td><td>product_id</td><td>12<div class='subtle'>1 row(s)</div></td><td>1012</td><td>Incomplete records.</td><td>Fill or drop blank `product_id`.</td></tr><tr><td><span class="pill p1">P1</span></td><td>Missing required value</td><td>order_date</td><td>11<div class='subtle'>1 row(s)</div></td><td>1011</td><td>Incomplete records.</td><td>Fill or drop blank `order_date`.</td></tr><tr><td><span class="pill p2">P2</span></td><td>Value outside allowed range</td><td>quantity</td><td>4, 13<div class='subtle'>2 row(s)</div></td><td>1004, 1013</td><td>Skewed metrics/models.</td><td>Fix `quantity` outside limits.</td></tr><tr><td><span class="pill p2">P2</span></td><td>Value outside allowed range</td><td>unit_price</td><td>5<div class='subtle'>1 row(s)</div></td><td>1005</td><td>Skewed metrics/models.</td><td>Fix `unit_price` outside limits.</td></tr><tr><td><span class="pill p2">P2</span></td><td>Value outside allowed range</td><td>discount_pct</td><td>9<div class='subtle'>1 row(s)</div></td><td>1009</td><td>Skewed metrics/models.</td><td>Fix `discount_pct` outside limits.</td></tr><tr><td><span class="pill p2">P2</span></td><td>Invalid category value</td><td>payment_method</td><td>10<div class='subtle'>1 row(s)</div></td><td>1010</td><td>Broken grouping.</td><td>Map `payment_method` to card/upi/cash.</td></tr></tbody></table>
+    </div>
+
+    <div class="section">
+      <h2>Fix Rows (Highlight = Issue)</h2>
+      <div class="legend">Yellow cell = bad value.</div>
+      <table class="clean-table issue-rows-table"><thead><tr><th>Row</th><th>order_id</th><th>Issue</th><th>customer_id</th><th>product_id</th><th>order_date</th><th>quantity</th><th>unit_price</th><th>discount_pct</th><th>payment_method</th><th>city</th></tr></thead><tbody><tr class="issue-row"><td>4</td><td>1004</td><td class='issues-col'>Value outside allowed range (quantity)</td><td>504.0</td><td>9009.0</td><td>2026-02-21</td><td class="cell-issue">0</td><td>450.0</td><td>0</td><td>card</td><td>Chennai</td></tr><tr class="issue-row"><td>5</td><td>1005</td><td class='issues-col'>Value outside allowed range (unit_price)</td><td>505.0</td><td>9010.0</td><td>2026-02-22</td><td>2</td><td class="cell-issue">-40.0</td><td>0</td><td>card</td><td>Pune</td></tr><tr class="issue-row"><td>6</td><td>1006</td><td class='issues-col'>Missing required value (customer_id)</td><td class="cell-issue">NULL</td><td>9005.0</td><td>2026-02-22</td><td>1</td><td>599.0</td><td>15</td><td>upi</td><td>Hyderabad</td></tr><tr class="issue-row"><td>7</td><td class="cell-issue">1007</td><td class='issues-col'>Duplicate value found (order_id)</td><td>507.0</td><td>9006.0</td><td>2026-02-22</td><td>4</td><td>250.0</td><td>8</td><td>card</td><td>Kolkata</td></tr><tr class="issue-row"><td>8</td><td class="cell-issue">1007</td><td class='issues-col'>Duplicate value found (order_id)</td><td>508.0</td><td>9008.0</td><td>2026-02-23</td><td>2</td><td>1200.0</td><td>12</td><td>card</td><td>Kolkata</td></tr><tr class="issue-row"><td>9</td><td>1009</td><td class='issues-col'>Value outside allowed range (discount_pct)</td><td>509.0</td><td>9003.0</td><td>2026-02-23</td><td>1</td><td>999.0</td><td class="cell-issue">75</td><td>card</td><td>Jaipur</td></tr><tr class="issue-row"><td>10</td><td>1010</td><td class='issues-col'>Invalid category value (payment_method)</td><td>510.0</td><td>9007.0</td><td>2026-02-24</td><td>2</td><td>300.0</td><td>10</td><td class="cell-issue">crypto</td><td>Noida</td></tr><tr class="issue-row"><td>11</td><td>1011</td><td class='issues-col'>Missing required value (order_date)</td><td>511.0</td><td>9001.0</td><td class="cell-issue">NULL</td><td>1</td><td>499.99</td><td>5</td><td>card</td><td>Bangalore</td></tr><tr class="issue-row"><td>12</td><td>1012</td><td class='issues-col'>Missing required value (product_id)</td><td>512.0</td><td class="cell-issue">NULL</td><td>2026-02-25</td><td>2</td><td>1499.0</td><td>5</td><td>upi</td><td>Delhi</td></tr><tr class="issue-row"><td>13</td><td>1013</td><td class='issues-col'>Value outside allowed range (quantity)</td><td>513.0</td><td>9012.0</td><td>2026-02-25</td><td class="cell-issue">25</td><td>89.0</td><td>2</td><td>cash</td><td>Nagpur</td></tr></tbody></table>
+    </div>
+
+    <div class="section">
+      <h2>Optional Details</h2>
+      <details>
+        <summary>Column Profile</summary>
+        <table class="dataframe clean-table">
+  <thead>
+    <tr style="text-align: right;">
+      <th>column</th>
+      <th>count</th>
+      <th>unique</th>
+      <th>top</th>
+      <th>freq</th>
+      <th>mean</th>
+      <th>min</th>
+      <th>25%</th>
+      <th>50%</th>
+      <th>75%</th>
+      <th>max</th>
+      <th>std</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>order_id</td>
+      <td>15.0</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>1007.933333</td>
+      <td>1001.0</td>
+      <td>1004.5</td>
+      <td>1007.0</td>
+      <td>1011.5</td>
+      <td>1015.0</td>
+      <td>4.479583</td>
+    </tr>
+    <tr>
+      <td>customer_id</td>
+      <td>14.0</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>508.142857</td>
+      <td>501.0</td>
+      <td>504.25</td>
+      <td>508.5</td>
+      <td>511.75</td>
+      <td>515.0</td>
+      <td>4.6053</td>
+    </tr>
+    <tr>
+      <td>product_id</td>
+      <td>14.0</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>9006.785714</td>
+      <td>9001.0</td>
+      <td>9003.25</td>
+      <td>9006.5</td>
+      <td>9009.75</td>
+      <td>9014.0</td>
+      <td>4.388421</td>
+    </tr>
+    <tr>
+      <td>order_date</td>
+      <td>14</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>2026-02-22 20:34:17.142857216</td>
+      <td>2026-02-20 00:00:00</td>
+      <td>2026-02-21 06:00:00</td>
+      <td>2026-02-22 12:00:00</td>
+      <td>2026-02-24 18:00:00</td>
+      <td>2026-02-26 00:00:00</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <td>quantity</td>
+      <td>15.0</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>3.2</td>
+      <td>0.0</td>
+      <td>1.0</td>
+      <td>2.0</td>
+      <td>2.0</td>
+      <td>25.0</td>
+      <td>6.108542</td>
+    </tr>
+    <tr>
+      <td>unit_price</td>
+      <td>15.0</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>906.298667</td>
+      <td>-40.0</td>
+      <td>375.0</td>
+      <td>599.0</td>
+      <td>1099.5</td>
+      <td>4500.0</td>
+      <td>1088.470295</td>
+    </tr>
+    <tr>
+      <td>discount_pct</td>
+      <td>15.0</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>10.666667</td>
+      <td>0.0</td>
+      <td>2.5</td>
+      <td>5.0</td>
+      <td>10.0</td>
+      <td>75.0</td>
+      <td>18.399017</td>
+    </tr>
+    <tr>
+      <td>payment_method</td>
+      <td>15</td>
+      <td>4</td>
+      <td>card</td>
+      <td>8</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <td>city</td>
+      <td>15</td>
+      <td>12</td>
+      <td>Bangalore</td>
+      <td>2</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <td>gross_amount</td>
+      <td>15.0</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>1405.898</td>
+      <td>-80.0</td>
+      <td>599.5</td>
+      <td>999.98</td>
+      <td>2311.75</td>
+      <td>4500.0</td>
+      <td>1257.442031</td>
+    </tr>
+    <tr>
+      <td>net_amount</td>
+      <td>15.0</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>1260.8365</td>
+      <td>-80.0</td>
+      <td>492.07025</td>
+      <td>899.982</td>
+      <td>2146.25</td>
+      <td>4050.0</td>
+      <td>1185.088764</td>
+    </tr>
+  </tbody>
+</table>
+      </details>
+      <details>
+        <summary>Sample Rows (Top 50)</summary>
+        <table class="dataframe clean-table">
+  <thead>
+    <tr style="text-align: right;">
+      <th>order_id</th>
+      <th>customer_id</th>
+      <th>product_id</th>
+      <th>order_date</th>
+      <th>quantity</th>
+      <th>unit_price</th>
+      <th>discount_pct</th>
+      <th>payment_method</th>
+      <th>city</th>
+      <th>gross_amount</th>
+      <th>net_amount</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>1001</td>
+      <td>501.0</td>
+      <td>9001.0</td>
+      <td>2026-02-20</td>
+      <td>2</td>
+      <td>499.99</td>
+      <td>10</td>
+      <td>card</td>
+      <td>Bangalore</td>
+      <td>999.98</td>
+      <td>899.9820</td>
+    </tr>
+    <tr>
+      <td>1002</td>
+      <td>502.0</td>
+      <td>9004.0</td>
+      <td>2026-02-20</td>
+      <td>1</td>
+      <td>1299.00</td>
+      <td>0</td>
+      <td>upi</td>
+      <td>Delhi</td>
+      <td>1299.00</td>
+      <td>1299.0000</td>
+    </tr>
+    <tr>
+      <td>1003</td>
+      <td>503.0</td>
+      <td>9002.0</td>
+      <td>2026-02-21</td>
+      <td>3</td>
+      <td>799.50</td>
+      <td>5</td>
+      <td>cash</td>
+      <td>Mumbai</td>
+      <td>2398.50</td>
+      <td>2278.5750</td>
+    </tr>
+    <tr>
+      <td>1004</td>
+      <td>504.0</td>
+      <td>9009.0</td>
+      <td>2026-02-21</td>
+      <td>0</td>
+      <td>450.00</td>
+      <td>0</td>
+      <td>card</td>
+      <td>Chennai</td>
+      <td>0.00</td>
+      <td>0.0000</td>
+    </tr>
+    <tr>
+      <td>1005</td>
+      <td>505.0</td>
+      <td>9010.0</td>
+      <td>2026-02-22</td>
+      <td>2</td>
+      <td>-40.00</td>
+      <td>0</td>
+      <td>card</td>
+      <td>Pune</td>
+      <td>-80.00</td>
+      <td>-80.0000</td>
+    </tr>
+    <tr>
+      <td>1006</td>
+      <td>NaN</td>
+      <td>9005.0</td>
+      <td>2026-02-22</td>
+      <td>1</td>
+      <td>599.00</td>
+      <td>15</td>
+      <td>upi</td>
+      <td>Hyderabad</td>
+      <td>599.00</td>
+      <td>509.1500</td>
+    </tr>
+    <tr>
+      <td>1007</td>
+      <td>507.0</td>
+      <td>9006.0</td>
+      <td>2026-02-22</td>
+      <td>4</td>
+      <td>250.00</td>
+      <td>8</td>
+      <td>card</td>
+      <td>Kolkata</td>
+      <td>1000.00</td>
+      <td>920.0000</td>
+    </tr>
+    <tr>
+      <td>1007</td>
+      <td>508.0</td>
+      <td>9008.0</td>
+      <td>2026-02-23</td>
+      <td>2</td>
+      <td>1200.00</td>
+      <td>12</td>
+      <td>card</td>
+      <td>Kolkata</td>
+      <td>2400.00</td>
+      <td>2112.0000</td>
+    </tr>
+    <tr>
+      <td>1009</td>
+      <td>509.0</td>
+      <td>9003.0</td>
+      <td>2026-02-23</td>
+      <td>1</td>
+      <td>999.00</td>
+      <td>75</td>
+      <td>card</td>
+      <td>Jaipur</td>
+      <td>999.00</td>
+      <td>249.7500</td>
+    </tr>
+    <tr>
+      <td>1010</td>
+      <td>510.0</td>
+      <td>9007.0</td>
+      <td>2026-02-24</td>
+      <td>2</td>
+      <td>300.00</td>
+      <td>10</td>
+      <td>crypto</td>
+      <td>Noida</td>
+      <td>600.00</td>
+      <td>540.0000</td>
+    </tr>
+    <tr>
+      <td>1011</td>
+      <td>511.0</td>
+      <td>9001.0</td>
+      <td>NaT</td>
+      <td>1</td>
+      <td>499.99</td>
+      <td>5</td>
+      <td>card</td>
+      <td>Bangalore</td>
+      <td>499.99</td>
+      <td>474.9905</td>
+    </tr>
+    <tr>
+      <td>1012</td>
+      <td>512.0</td>
+      <td>NaN</td>
+      <td>2026-02-25</td>
+      <td>2</td>
+      <td>1499.00</td>
+      <td>5</td>
+      <td>upi</td>
+      <td>Delhi</td>
+      <td>2998.00</td>
+      <td>2848.1000</td>
+    </tr>
+    <tr>
+      <td>1013</td>
+      <td>513.0</td>
+      <td>9012.0</td>
+      <td>2026-02-25</td>
+      <td>25</td>
+      <td>89.00</td>
+      <td>2</td>
+      <td>cash</td>
+      <td>Nagpur</td>
+      <td>2225.00</td>
+      <td>2180.5000</td>
+    </tr>
+    <tr>
+      <td>1014</td>
+      <td>514.0</td>
+      <td>9013.0</td>
+      <td>2026-02-26</td>
+      <td>1</td>
+      <td>4500.00</td>
+      <td>10</td>
+      <td>card</td>
+      <td>Surat</td>
+      <td>4500.00</td>
+      <td>4050.0000</td>
+    </tr>
+    <tr>
+      <td>1015</td>
+      <td>515.0</td>
+      <td>9014.0</td>
+      <td>2026-02-26</td>
+      <td>1</td>
+      <td>650.00</td>
+      <td>3</td>
+      <td>upi</td>
+      <td>Kochi</td>
+      <td>650.00</td>
+      <td>630.5000</td>
+    </tr>
+  </tbody>
+</table>
+      </details>
+    </div>
+  </div>
+</body>
+</html>

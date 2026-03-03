@@ -1,0 +1,77 @@
+{
+  "run_timestamp_utc": "2026-03-03T08:49:07.550434+00:00",
+  "engine": "great_expectations",
+  "success": false,
+  "evaluated_expectations": 17,
+  "successful_expectations": 9,
+  "failed_expectations_count": 8,
+  "failed_expectations": [
+    {
+      "expectation_type": "expect_column_values_to_be_unique",
+      "column": "order_id",
+      "unexpected_count": 2,
+      "sample_unexpected": [
+        1007,
+        1007
+      ]
+    },
+    {
+      "expectation_type": "expect_column_values_to_not_be_null",
+      "column": "customer_id",
+      "unexpected_count": 1,
+      "sample_unexpected": [
+        null
+      ]
+    },
+    {
+      "expectation_type": "expect_column_values_to_not_be_null",
+      "column": "product_id",
+      "unexpected_count": 1,
+      "sample_unexpected": [
+        null
+      ]
+    },
+    {
+      "expectation_type": "expect_column_values_to_not_be_null",
+      "column": "order_date",
+      "unexpected_count": 1,
+      "sample_unexpected": [
+        null
+      ]
+    },
+    {
+      "expectation_type": "expect_column_values_to_be_between",
+      "column": "quantity",
+      "unexpected_count": 2,
+      "sample_unexpected": [
+        0,
+        25
+      ]
+    },
+    {
+      "expectation_type": "expect_column_values_to_be_between",
+      "column": "unit_price",
+      "unexpected_count": 1,
+      "sample_unexpected": [
+        -40.0
+      ]
+    },
+    {
+      "expectation_type": "expect_column_values_to_be_between",
+      "column": "discount_pct",
+      "unexpected_count": 1,
+      "sample_unexpected": [
+        75
+      ]
+    },
+    {
+      "expectation_type": "expect_column_values_to_be_in_set",
+      "column": "payment_method",
+      "unexpected_count": 1,
+      "sample_unexpected": [
+        "crypto"
+      ]
+    }
+  ],
+  "data_docs_url": "data_docs/index.html"
+}
