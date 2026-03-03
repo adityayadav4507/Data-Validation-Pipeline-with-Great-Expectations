@@ -1,6 +1,35 @@
 # Data Validation Pipeline with Great Expectations
 
-Python ETL + data validation project for the ML Engineer assignment.
+Python ETL + Data Validation project with automated data quality checks using Great Expectations.
+
+---
+
+## 🚀 Quick Start (How to Run)
+
+1. **Clone the repository**
+```bash
+git clone https://github.com/adityayadav4507/Data-Validation-Pipeline-with-Great-Expectations.git
+cd Data-Validation-Pipeline-with-Great-Expectations
+# Mac/Linux:
+python -m venv venv 
+source venv/bin/activate
+# Windows (PowerShell):
+python -m venv venv
+venv\Scripts\Activate.ps1
+
+Install dependencies
+
+pip install -r requirements.txt
+
+Run the pipeline
+python main.py
+
+Open the generated dashboard
+open data_docs/index.html
+
+To run validation on a custom CSV:
+python main.py --input data/your_file.csv
+
 
 ## Tech Stack
 - Python 3.x
@@ -38,12 +67,6 @@ reaidy/
 ├─ main.py
 ├─ requirements.txt
 └─ EVALUATION_GUIDE.md
-```
-
-## Run (2 Commands)
-```bash
-python -m pip install -r requirements.txt
-python main.py
 ```
 
 ## Main File To Review
