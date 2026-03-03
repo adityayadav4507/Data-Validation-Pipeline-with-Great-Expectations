@@ -11,26 +11,26 @@ Python ETL + Data Validation project with automated data quality checks using Gr
 git clone https://github.com/adityayadav4507/Data-Validation-Pipeline-with-Great-Expectations.git
 cd Data-Validation-Pipeline-with-Great-Expectations
 ```
-2. reate & activate a virtual environment (recommended)
-   # Mac/Linux:
+2. **Create & activate a virtual environment** (recommended)
+   Mac/Linux:
 ```
 python -m venv venv 
 source venv/bin/activate
 ```
-  # Windows (PowerShell):
+   Windows (PowerShell):
 ```
 python -m venv venv
 venv\Scripts\Activate.ps1
 ```
-3. Install dependencies
+3. **Install dependencies**
 ```
 pip install -r requirements.txt
 ```
-4. Run the pipeline
+4. **Run the pipeline**
 ```
 python main.py
 ```
-5. Open the generated dashboard
+5. **Open the generated dashboard**
 ```
 open data_docs/index.html
 ```
