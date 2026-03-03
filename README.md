@@ -10,32 +10,34 @@ Python ETL + Data Validation project with automated data quality checks using Gr
 ```bash
 git clone https://github.com/adityayadav4507/Data-Validation-Pipeline-with-Great-Expectations.git
 cd Data-Validation-Pipeline-with-Great-Expectations
-# Mac/Linux:
+```
+2. reate & activate a virtual environment (recommended)
+   # Mac/Linux:
+```
 python -m venv venv 
 source venv/bin/activate
-# Windows (PowerShell):
+```
+  # Windows (PowerShell):
+```
 python -m venv venv
 venv\Scripts\Activate.ps1
-
-Install dependencies
-
+```
+3. Install dependencies
+```
 pip install -r requirements.txt
-
-Run the pipeline
+```
+4. Run the pipeline
+```
 python main.py
-
-Open the generated dashboard
+```
+5. Open the generated dashboard
+```
 open data_docs/index.html
-
-To run validation on a custom CSV:
-python main.py --input data/your_file.csv
-
-
+```
 ## Tech Stack
 - Python 3.x
 - Pandas
 - Great Expectations
-
 ## Assignment Deliverables (Included)
 - Great Expectations project with expectation suite:
   - `great_expectations/expectations/sales_data_suite.json`
@@ -48,7 +50,7 @@ python main.py --input data/your_file.csv
   - `reports/validation_summary.json`
   - `reports/validation_summary.md`
   - `reports/checkpoint_result.json`
-
+    
 ## Project Structure
 ```text
 reaidy/
