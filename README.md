@@ -12,6 +12,7 @@ git clone https://github.com/adityayadav4507/Data-Validation-Pipeline-with-Great
 cd Data-Validation-Pipeline-with-Great-Expectations
 ```
 2. **Create & activate a virtual environment** (recommended)
+   
    Mac/Linux:
 ```
 python -m venv venv 
@@ -38,19 +39,7 @@ open data_docs/index.html
 - Python 3.x
 - Pandas
 - Great Expectations
-## Assignment Deliverables (Included)
-- Great Expectations project with expectation suite:
-  - `great_expectations/expectations/sales_data_suite.json`
-- Python ETL + validation workflow:
-  - `etl_with_validation.py`
-  - `main.py`
-- Generated documentation + violation reports:
-  - `data_docs/index.html` (clean evaluator dashboard)
-  - `data_docs/local_site/index.html` (full Great Expectations docs copy)
-  - `reports/validation_summary.json`
-  - `reports/validation_summary.md`
-  - `reports/checkpoint_result.json`
-    
+
 ## Project Structure
 ```text
 reaidy/
@@ -70,7 +59,19 @@ reaidy/
 ├─ requirements.txt
 └─ EVALUATION_GUIDE.md
 ```
-
+## Project Deliverables (Included)
+- Great Expectations project with expectation suite:
+  - `great_expectations/expectations/sales_data_suite.json`
+- Python ETL + validation workflow:
+  - `etl_with_validation.py`
+  - `main.py`
+- Generated documentation + violation reports:
+  - `data_docs/index.html` (clean evaluator dashboard)
+  - `data_docs/local_site/index.html` (full Great Expectations docs copy)
+  - `reports/validation_summary.json`
+  - `reports/validation_summary.md`
+  - `reports/checkpoint_result.json`
+    
 ## Main File To Review
 - `data_docs/index.html`
 
